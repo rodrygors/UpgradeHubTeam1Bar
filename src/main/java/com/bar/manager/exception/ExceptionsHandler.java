@@ -29,4 +29,13 @@ public class ExceptionsHandler {
                 LocalDateTime.now()
         );
     }
+    @ExceptionHandler({BartenderNotFound.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private HttpErrorResponse handleGenericException(BartenderNotFound exception) {
+        return new HttpErrorResponse(
+                404,
+                exception.getMessage(),
+                LocalDateTime.now()
+        );
+    }
 }
