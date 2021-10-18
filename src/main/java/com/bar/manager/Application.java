@@ -1,4 +1,4 @@
-package com.pet.manager;
+package com.bar.manager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
