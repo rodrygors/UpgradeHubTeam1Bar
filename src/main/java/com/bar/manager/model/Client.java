@@ -4,20 +4,15 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.Min;
-
 @Document
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Drink {
+public class Client {
     @Id
     private String id;
-    private String name;
-    private String description;
-    @Min(0)
-    private float alcohol;
-    private float price;
+    private String nome;
+    private int age;
 }

@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DrinkRequest {
-    private String name;
-    private String description;
-    private float alcohol;
-    private float price;
+public class ClientRequest {
+    private String nome;
+    private int age;
 }
