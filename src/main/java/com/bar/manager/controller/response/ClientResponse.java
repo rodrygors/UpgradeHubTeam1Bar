@@ -7,10 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DrinkResponse {
+public class ClientResponse {
     private String id;
-    private String name;
-    private String description;
-    private float alcohol;
-    private float price;
+    private String nome;
+    private int age;
 }
