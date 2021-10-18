@@ -1,4 +1,4 @@
-package com.pet.manager.util;
+package com.bar.manager.util;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
