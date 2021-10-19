@@ -2,6 +2,7 @@ package com.bar.manager.controller;
 
 import com.bar.manager.controller.request.BartenderRequest;
 import com.bar.manager.controller.response.BartenderResponse;
+import com.bar.manager.exception.BartenderNotFound;
 import com.bar.manager.model.Bartender;
 import com.bar.manager.service.BartenderService;
 import org.springframework.validation.annotation.Validated;
@@ -41,20 +42,52 @@ public class BartenderController {
 
     @PostMapping(value = "/bartenders")
     public BartenderResponse addBartender(@RequestBody @Valid BartenderRequest bartenderRequest) {
-       Bartender bartender = bartenderServ.add(
+        Bartender bartender = bartenderServ.add(
                 Bartender.builder()
                         .name(bartenderRequest.getName())
                         .age(bartenderRequest.getAge())
                         .nif(bartenderRequest.getNif())
                         .build()
         );
-       return new BartenderResponse(
-               bartender.getId(),
-               bartender.getName(),
-               bartender.getAge(),
-               bartender.getNif()
+        return new BartenderResponse(
+                bartender.getId(),
+                bartender.getName(),
+                bartender.getAge(),
+                bartender.getNif()
 
-       );
+        );
 
     }
+    @GetMapping(value="bartenders/{id}")
+    public BartenderResponse getById (@PathVariable (value = "id")String id) {
+        Bartender bartender = bartenderServ.findById(id);
+        return new BartenderResponse(
+                bartender.getId(),
+                bartender.getName(),
+                bartender.getAge(),
+                bartender.getNif()
+        );
+    }
+    @PutMapping(value="bartenders")
+    public BartenderResponse updateBartender(@RequestBody Bartender newBartender, @PathVariable String id) throws BartenderNotFound {
+        Bartender updateBartender = bartenderServ.findById(id);
+        updateBartender.setId(newBartender.getId());
+        updateBartender.setName(newBartender.getName());
+        updateBartender.setAge(newBartender.getAge());
+        updateBartender.setNif(newBartender.getNif());
+
+        return new  BartenderResponse(
+                updateBartender.getId(),
+                updateBartender.getName(),
+                updateBartender.getAge(),
+                updateBartender.getNif()
+        );
+    }
+
+    @DeleteMapping(value = "/Bartender")
+    public void deleteBartender(@PathVariable (value = "id") String id ){
+        bartenderServ.deleteBartender(id);
+    }
+
 }
+

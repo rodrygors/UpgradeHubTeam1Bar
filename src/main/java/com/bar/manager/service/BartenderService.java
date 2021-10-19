@@ -1,5 +1,7 @@
 package com.bar.manager.service;
 
+import com.bar.manager.controller.response.BartenderResponse;
+import com.bar.manager.exception.BartenderNotFound;
 import com.bar.manager.exception.DuplicateBartenderException;
 import com.bar.manager.model.Bartender;
 import com.bar.manager.repository.BartenderRepository;
@@ -16,6 +18,11 @@ public class BartenderService {
         this.bartenderRepo = bartenderRepo;
     }
 
+    public void deleteBartender(String id) {
+        this.findById(id);
+        bartenderRepo.deleteById(id);
+    }
+
     public List<Bartender> findAll() {
         return bartenderRepo.findAll();
     }
@@ -27,5 +34,9 @@ public class BartenderService {
        catch (DuplicateKeyException e) {
            throw new DuplicateBartenderException();
        }
+    }
+
+    public Bartender findById(String id) {
+       return bartenderRepo.findById(id).orElseThrow(BartenderNotFound::new);
     }
 }
