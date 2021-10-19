@@ -39,4 +39,17 @@ public class BartenderService {
     public Bartender findById(String id) {
        return bartenderRepo.findById(id).orElseThrow(BartenderNotFound::new);
     }
+
+    public Bartender update(String id, Bartender newBartender) {
+        Bartender bartender = this.findById(id);
+        bartender.setNif(newBartender.getNif());
+        bartender.setName(newBartender.getName());
+        bartender.setAge(newBartender.getAge());
+        try {
+            return bartenderRepo.save(bartender);
+        }
+        catch (DuplicateKeyException e) {
+            throw new DuplicateBartenderException();
+        }
+    }
 }

@@ -69,12 +69,13 @@ public class BartenderController {
         );
     }
     @PutMapping(value="bartenders")
-    public BartenderResponse updateBartender(@RequestBody Bartender newBartender, @PathVariable String id) throws BartenderNotFound {
-        Bartender updateBartender = bartenderServ.findById(id);
-        updateBartender.setId(newBartender.getId());
-        updateBartender.setName(newBartender.getName());
-        updateBartender.setAge(newBartender.getAge());
-        updateBartender.setNif(newBartender.getNif());
+    public BartenderResponse updateBartender(@RequestBody BartenderRequest newBartender, @PathVariable String id) throws BartenderNotFound {
+        Bartender updateBartender = bartenderServ.update(id,
+                Bartender.builder()
+                        .nif(newBartender.getNif())
+                        .age(newBartender.getAge())
+                        .name(newBartender.getName())
+                        .build());
 
         return new  BartenderResponse(
                 updateBartender.getId(),
