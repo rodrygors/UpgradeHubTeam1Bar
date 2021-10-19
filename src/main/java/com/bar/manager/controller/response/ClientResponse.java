@@ -9,6 +9,6 @@ import lombok.*;
 @Builder
 public class ClientResponse {
     private String id;
-    private String nome;
+    private String name;
     private int age;
 }
