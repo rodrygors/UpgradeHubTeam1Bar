@@ -2,6 +2,7 @@ package com.bar.manager.model;
 
 import lombok.*;
 import nonapi.io.github.classgraph.json.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -15,6 +16,7 @@ public class Bartender {
     private String id;
     private String name;
     private int age;
+    @Indexed (unique = true)
     private int nif;
 
 }

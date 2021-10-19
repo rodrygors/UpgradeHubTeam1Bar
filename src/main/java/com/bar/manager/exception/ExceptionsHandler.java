@@ -38,4 +38,13 @@ public class ExceptionsHandler {
                 LocalDateTime.now()
         );
     }
+    @ExceptionHandler({DuplicateBartenderException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    private HttpErrorResponse handleGenericException(DuplicateBartenderException exception) {
+        return new HttpErrorResponse(
+                409,
+                exception.getMessage(),
+                LocalDateTime.now()
+        );
+    }
 }
