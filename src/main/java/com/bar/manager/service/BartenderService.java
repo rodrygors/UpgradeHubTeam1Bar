@@ -19,8 +19,10 @@ public class BartenderService {
     }
 
     public void deleteBartender(String id) {
-        this.findById(id);
-        bartenderRepo.deleteById(id);
+        if(bartenderRepo.existsById(id)){
+            bartenderRepo.deleteById(id);
+        }
+        else throw new BartenderNotFound();
     }
 
     public List<Bartender> findAll() {

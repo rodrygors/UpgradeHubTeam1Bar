@@ -19,5 +19,6 @@ public class Drink {
     private String description;
     @Min(0)
     private float alcohol;
+    @Min(0)
     private float price;
 }

@@ -27,15 +27,17 @@ public class ClientService {
         return clientRepo.save(client);
     }
 
-    public Client updateClient(Client newclient, String id) {
+    public Client updateClient(Client newClient, String id) {
         Client client = this.findById(id);
-        client.setAge(newclient.getAge());
-        client.setName(newclient.getName());
+        client.setAge(newClient.getAge());
+        client.setName(newClient.getName());
         return client;
     }
 
     public void deleteById(String id) {
-        this.findById(id);
-        clientRepo.deleteById(id);
+        if(clientRepo.existsById(id)){
+            clientRepo.deleteById(id);
+        }
+        else throw new ClientNotFound();
     }
 }

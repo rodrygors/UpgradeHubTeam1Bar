@@ -37,7 +37,10 @@ public class DrinkService {
     }
 
     public void deleteById(String id) {
-        this.findById(id);
-        drinkRepo.deleteById(id);
+        if(drinkRepo.existsById(id)){
+            drinkRepo.deleteById(id);
+        }
+        else throw new DrinkNotFound();
+
     }
 }

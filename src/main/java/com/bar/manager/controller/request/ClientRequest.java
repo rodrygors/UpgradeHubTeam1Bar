@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -14,5 +15,6 @@ import javax.validation.constraints.NotBlank;
 public class ClientRequest {
     @NotBlank(message =  "Name is mandatory")
     private String name;
+    @Min(0)
     private int age;
 }

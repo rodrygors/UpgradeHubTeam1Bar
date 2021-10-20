@@ -18,5 +18,4 @@ public class Bartender {
     private int age;
     @Indexed (unique = true)
     private int nif;
-
 }

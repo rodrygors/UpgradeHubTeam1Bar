@@ -28,12 +28,7 @@ public class BartenderController {
         List<BartenderResponse> bartenderResponseList = new ArrayList<>();
         for (Bartender bartender : bartenders) {
             bartenderResponseList.add(
-                    new BartenderResponse(
-                            bartender.getId(),
-                            bartender.getName(),
-                            bartender.getAge(),
-                            bartender.getNif()
-                    )
+                    new BartenderResponse().bartenderToBartenderResponse(bartender)
 
             );
         }
@@ -49,24 +44,13 @@ public class BartenderController {
                         .nif(bartenderRequest.getNif())
                         .build()
         );
-        return new BartenderResponse(
-                bartender.getId(),
-                bartender.getName(),
-                bartender.getAge(),
-                bartender.getNif()
-
-        );
+        return new BartenderResponse().bartenderToBartenderResponse(bartender);
 
     }
     @GetMapping(value="bartenders/{id}")
     public BartenderResponse getById (@PathVariable (value = "id")String id) {
         Bartender bartender = bartenderServ.findById(id);
-        return new BartenderResponse(
-                bartender.getId(),
-                bartender.getName(),
-                bartender.getAge(),
-                bartender.getNif()
-        );
+        return new BartenderResponse().bartenderToBartenderResponse(bartender);
     }
     @PutMapping(value="bartenders")
     public BartenderResponse updateBartender(@RequestBody BartenderRequest newBartender, @PathVariable String id) throws BartenderNotFound {
@@ -77,18 +61,12 @@ public class BartenderController {
                         .name(newBartender.getName())
                         .build());
 
-        return new  BartenderResponse(
-                updateBartender.getId(),
-                updateBartender.getName(),
-                updateBartender.getAge(),
-                updateBartender.getNif()
-        );
+        return new  BartenderResponse().bartenderToBartenderResponse(updateBartender);
     }
 
-    @DeleteMapping(value = "/Bartender")
-    public void deleteBartender(@PathVariable (value = "id") String id ){
+    @DeleteMapping(value = "/bartender")
+    public void deleteBartender(@PathVariable (value = "id") String id){
         bartenderServ.deleteBartender(id);
     }
-
 }
 
