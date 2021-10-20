@@ -24,13 +24,7 @@ public class DrinkController {
     @GetMapping(value = "/drinks/{id}")
     public DrinkResponse getById(@PathVariable(value = "id") String id) {
         Drink newDrink = drinkServ.findById(id);
-        return new DrinkResponse(
-                newDrink.getId(),
-                newDrink.getName(),
-                newDrink.getDescription(),
-                newDrink.getAlcohol(),
-                newDrink.getPrice()
-        );
+        return new DrinkResponse().drinkToDrinkResponse(newDrink);
 
     }
 
@@ -39,13 +33,7 @@ public class DrinkController {
         List<Drink> drinks = drinkServ.findAll();
         List<DrinkResponse> drinkResponses = new ArrayList<>();
         for (Drink drink : drinks) {
-            drinkResponses.add(new DrinkResponse(
-                    drink.getId(),
-                    drink.getName(),
-                    drink.getDescription(),
-                    drink.getAlcohol(),
-                    drink.getPrice()
-            ));
+            drinkResponses.add(new DrinkResponse().drinkToDrinkResponse(drink));
         }
         return drinkResponses;
     }
@@ -59,13 +47,7 @@ public class DrinkController {
                 .price(drinkRequest.getPrice())
                 .build()
         );
-        return new DrinkResponse(
-                drink.getId(),
-                drink.getName(),
-                drink.getDescription(),
-                drink.getAlcohol(),
-                drink.getPrice()
-        );
+        return new DrinkResponse().drinkToDrinkResponse(drink);
     }
 
     @PutMapping(value = "/drinks/{id}")
@@ -77,13 +59,7 @@ public class DrinkController {
                 .price(drinkRequest.getPrice())
                 .build(), id
         );
-        return new DrinkResponse(
-                drink.getId(),
-                drink.getName(),
-                drink.getDescription(),
-                drink.getAlcohol(),
-                drink.getPrice()
-        );
+        return new DrinkResponse().drinkToDrinkResponse(drink);
     }
 
     @DeleteMapping(value = "/drinks/{id}")
