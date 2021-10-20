@@ -20,11 +20,7 @@ public class ClientController {
     @GetMapping(value = "/clients/{id}")
     public ClientResponse getClientById(@PathVariable(value = "id") String id){
         Client client = clientServ.findById(id);
-        return new ClientResponse(
-                client.getId(),
-                client.getName(),
-                client.getAge()
-        );
+        return new ClientResponse().clientToClientResponse(client);
     }
 
     @GetMapping(value = "/clients")
@@ -32,11 +28,7 @@ public class ClientController {
         List<Client> clients = clientServ.findAll();
         List<ClientResponse> clientResponses = new ArrayList<>();
         for(Client client : clients){
-            clientResponses.add(new ClientResponse(
-                    client.getId(),
-                    client.getName(),
-                    client.getAge()
-            ));
+            clientResponses.add(new ClientResponse().clientToClientResponse(client));
         }
         return clientResponses;
     }
@@ -48,11 +40,7 @@ public class ClientController {
                 .age(clientRequest.getAge())
                 .build()
         );
-        return new ClientResponse(
-                client.getId(),
-                client.getName(),
-                client.getAge()
-        );
+        return new ClientResponse().clientToClientResponse(client);
     }
 
     @PutMapping(value = "/clients/{id}")
@@ -62,11 +50,7 @@ public class ClientController {
                 .age(clientRequest.getAge())
                 .build(), id
         );
-        return new ClientResponse(
-                client.getId(),
-                client.getName(),
-                client.getAge()
-        );
+        return new ClientResponse().clientToClientResponse(client);
     }
 
     @DeleteMapping(value = "/clients/{id}")
